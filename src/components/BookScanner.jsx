@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Upload, Camera } from "lucide-react";
 import Button from "./ui/Button";
 import CameraComponent from "./CameraComponent";
+import SearchBar from "./SearchBar"; // Import the SearchBar component
 
 export default function BookScanner() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -35,10 +36,18 @@ export default function BookScanner() {
     setDragOver(false);
   };
 
+  const handleSearch = (query) => {
+    console.log("Searching for:", query);
+    // Implement search functionality here
+  };
+
   return (
     <div id="book-scanner" className="flex flex-col items-center justify-center p-6">
+      {/* Search Bar */}
+      <SearchBar onSearch={handleSearch} />
+
       {/* Heading */}
-      <h1 className="text-2xl font-bold text-center mb-6">Search for Your Book</h1>
+      <h1 className="text-2xl font-bold text-center mt-8">Search for Your Book</h1>
       <p className="text-gray-500 text-center mb-8">
         Drag or drop your book cover here or click to upload.
       </p>
