@@ -11,20 +11,16 @@ const CameraComponent = ({ onClose, onCapture }) => {
 
   const startBackCamera = async () => {
     try {
-      stopCamera(); // Stop any existing stream before starting a new one
+      // Stop any existing stream before starting a new one
+      stopCamera();
 
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoDevices = devices.filter(device => device.kind === "videoinput");
-      const backCamera = videoDevices.find(device => device.label.toLowerCase().includes("back")) || videoDevices[0];
-
-      if (!backCamera) {
-        console.error("No back camera found.");
-        return;
-      }
-
+      // Request camera permissions and select the back camera
       const constraints = {
-        video: { deviceId: { exact: backCamera.deviceId } }
+        video: {
+          facingMode: "environment", // Use back camera
+        },
       };
+
       const newStream = await navigator.mediaDevices.getUserMedia(constraints);
       setStream(newStream);
 
@@ -33,12 +29,15 @@ const CameraComponent = ({ onClose, onCapture }) => {
       }
     } catch (error) {
       console.error("Error accessing camera:", error);
+      alert(
+        "Unable to access your camera. Please check browser permissions and ensure your device has a back camera."
+      );
     }
   };
 
   const stopCamera = () => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       setStream(null);
     }
   };
@@ -49,7 +48,7 @@ const CameraComponent = ({ onClose, onCapture }) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     const video = videoRef.current;
-    
+
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
