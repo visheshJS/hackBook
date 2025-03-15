@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Upload, Camera } from "lucide-react";
 
 const CameraComponent = ({ onClose, onCapture }) => {
   const videoRef = useRef(null);
@@ -68,18 +69,18 @@ const CameraComponent = ({ onClose, onCapture }) => {
       <div className="mt-4 flex space-x-4">
         <button
           onClick={capturePhoto}
-          className="p-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600"
+          className="p-3 bg-white text-black cursor-pointer font-bold rounded-md hover:bg-green-600"
         >
-          📸 Capture
+          <Camera></Camera> 
         </button>
         <button
           onClick={() => {
             stopCamera();
             onClose();
           }}
-          className="p-3 bg-red-500 text-white font-bold rounded-md hover:bg-red-600"
+          className="p-3 bg-white text-black font-bold cursor-pointer rounded-md hover:bg-red-600"
         >
-          ❌ Close
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
         </button>
       </div>
     </div>

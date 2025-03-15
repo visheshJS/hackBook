@@ -16,7 +16,7 @@ const SearchBar = ({ onSearch }) => {
         placeholder="Search by book name or ISBN..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className=" sm:min-w-sm sm:w-full max-w-md w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800"
+        className=" sm:min-w-sm sm:w-full max-w-md w-full bg-gray-100 px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800"
       />
       <button
         onClick={handleSearch}

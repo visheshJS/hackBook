@@ -1,6 +1,11 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 
 const HeroSection = () => {
+  const handleSearch = (query) => {
+    console.log("Searching for:", query);
+    // Implement search functionality here
+  };
   const scrollToBookScanner = () => {
     const bookScannerSection = document.getElementById("book-scanner");
     if (bookScannerSection) {
@@ -55,7 +60,7 @@ const HeroSection = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="text-center py-42 bg-[#f2f2f2]">
+      <div className="text-center shadow-amber-950 py-42 bg-[#f5f2f2]">
         <h1 className="text-6xl font-bold tracking-tight">
           Find Any Book With Just a Photo
         </h1>
@@ -73,10 +78,13 @@ const HeroSection = () => {
             Learn More
           </button>
         </div>
+        <br/>
+        <br/>
+        {/* Search Bar */}
+        <SearchBar onSearch={handleSearch} />
       </div>
     </>
   );
 };
 
 export default HeroSection;
-

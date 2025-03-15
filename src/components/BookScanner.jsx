@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Upload, Camera } from "lucide-react";
 import Button from "./ui/Button";
 import CameraComponent from "./CameraComponent";
-import SearchBar from "./SearchBar"; // Import the SearchBar component
+
+
 
 export default function BookScanner() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -36,18 +37,14 @@ export default function BookScanner() {
     setDragOver(false);
   };
 
-  const handleSearch = (query) => {
-    console.log("Searching for:", query);
-    // Implement search functionality here
-  };
+  
 
   return (
-    <div id="book-scanner" className="flex flex-col items-center justify-center p-6">
-      {/* Search Bar */}
-      <SearchBar onSearch={handleSearch} />
+    <div id="book-scanner" className="flex bg-[#f5f2f2] flex-col items-center justify-center p-6">
+      
 
       {/* Heading */}
-      <h1 className="text-2xl font-bold text-center mt-8">Search for Your Book</h1>
+      <h1 className="text-3xl font-bold text-center mt-8">Search for Your Book</h1>
       <p className="text-gray-500 text-center mb-8">
         Drag or drop your book cover here or click to upload.
       </p>
@@ -101,10 +98,11 @@ export default function BookScanner() {
           />
           <button
             onClick={() => setImagePreview(null)}
-            className="mt-4 text-black px-4 py-2 rounded-lg text-sm bg-gray-200 hover:bg-gray-300 transition"
-          >
-            Remove Image
+            className="mt-4 text-white w-[28px] h-[28px] flex cursor-pointer gap-2 justify-center rounded-full text-sm bg-black hover:bg-gray-950 transition"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="rounded-full" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+           
           </button>
+        
         </div>
       )}
 
