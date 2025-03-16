@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import HeroSection from './components/HeroSection'
 import BookScanner from './components/BookScanner'
-// import LampEffect from './components/LampEffect'
+
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <>
      <HeroSection/>
      <BookScanner/>
-      
+     
     </>
   )
 }

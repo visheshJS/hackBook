@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Upload, Camera } from "lucide-react";
-import Button from "./ui/Button";
+import Button from "../ui/Button";
 import CameraComponent from "./CameraComponent";
 
 
