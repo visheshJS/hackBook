@@ -6,6 +6,7 @@ const HeroSection = () => {
     console.log("Searching for:", query);
     // Implement search functionality here
   };
+
   const scrollToBookScanner = () => {
     const bookScannerSection = document.getElementById("book-scanner");
     if (bookScannerSection) {
@@ -67,20 +68,26 @@ const HeroSection = () => {
         <p className="text-gray-500 text-lg mt-4">
           Upload a photo of any book cover or page and instantly get results.
         </p>
+
+        {/* Buttons */}
         <div className="mt-6 space-x-4">
+          {/* Try It Now Button */}
           <button
             className="bg-black text-white px-6 py-3 rounded-lg cursor-pointer transform active:scale-90 duration-150 hover:bg-gray-800 transition"
             onClick={scrollToBookScanner}
           >
             Try It Now
           </button>
+
+          {/* Learn More Button */}
           <button className="border border-black px-6 py-3 rounded-lg hover:bg-gray-200 transition">
             Learn More
           </button>
         </div>
-        <br/>
-        <br/>
+
         {/* Search Bar */}
+        <br />
+        <br />
         <SearchBar onSearch={handleSearch} />
       </div>
     </>

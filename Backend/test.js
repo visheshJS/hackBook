@@ -1,34 +1,52 @@
-const libgen = require('libgen');
+import express from "express";
+import cors from "cors";
+import libgen from "libgen";
 
-async function test() {
-  try {
-    const urlString = await libgen.mirror();
-    // console.log(`${urlString} is currently fastest`);
+const app = express();
+const PORT = 5000;
 
-    const options = {
-      mirror: urlString,
-      query: 'cats',
-      count: 5,
-      sort_by: 'year',
-      reverse: true
-    };
+app.use(cors());
+app.use(express.json());
 
-    const data = await libgen.search(options);
-    console.log(data)
-    
-    let n = data.length;
-    console.log(`${n} results for "${options.query}"`);
-    while (n--) {
-      console.log('');
-      console.log('Title: ' + data[n].title);
-      console.log('Author: ' + data[n].author);
-      console.log('Download: ' +
-                  'http://gen.lib.rus.ec/book/index.php?md5=' +
-                  data[n].md5.toLowerCase());
+
+  
+// test.js (Backend)
+app.get("/search", async (req, res) => {
+    try {
+      const { query } = req.query;
+      if (!query) {
+        return res.status(400).json({ error: "Query parameter is required" });
+      }
+  
+      const mirror = await libgen.mirror();
+      const options = {
+        mirror: mirror,
+        query: query,
+        count: 5,
+        sort_by: "year",
+        reverse: true,
+      };
+  
+      const books = await libgen.search(options);
+  
+      // Add download/read links based on MD5 hash
+      books.forEach((book) => {
+        if (book.md5) {
+          book.url = `http://libgen.rs/get.php?md5=${book.md5}`; // Example Libgen URL for EPUB files
+        }
+      });
+      
+  
+      res.json(books);
+    } catch (err) {
+      console.error("Error fetching books:", err);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-  } catch (err) {
-    console.error('An error occurred:', err);
-  }
-}
+  });
+  
+  
+  
 
-test();
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
