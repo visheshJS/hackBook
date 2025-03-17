@@ -1,7 +1,8 @@
 from libgen_api import LibgenSearch
+import requests
 
 class Libgen() :
-    def search(self, author:str = "", title:str = "", publisher:str = "", year:str = "", language:str = "") -> list:
+    def search(self, author:str = "", title:str = "", publisher:str = "", year:str = "", language:str = "") -> list :
         if title == "" and author == "" :
             return []
         libgen = LibgenSearch()
@@ -21,6 +22,11 @@ class Libgen() :
             
         return self.resultfilter(result)
     
+    def searchISBN(self, isbn:int) -> list :
+        url = "https://openlibrary.org/isbn/" + str(isbn) + ".json"
+        book = requests.get(url)
+        return book.text
+    
     def getFilter(self, publisher:str = "", year:str = "", language:str = "") -> dict :
         filter = {}
         if publisher != "" :
@@ -34,14 +40,8 @@ class Libgen() :
     def resultfilter(self, searchResult:list) -> list :
         result = []
         libgen = LibgenSearch()
-        tempdict = {
-            "Author"    : "",
-            "Title"     : "",
-            "Year"      : "",
-            "Language"  : "",
-            "Download"  : ""
-        }
         for i in searchResult :
+            tempdict = {}
             tempdict["Author"]   = i["Author"]
             tempdict["Title"]    = i["Title"]
             tempdict["Year"]     = i["Year"]
@@ -58,7 +58,6 @@ class Libgen() :
 
 
 if __name__ == "__main__" :
-    a = Libgen()
-    r = a.search(title="Harry Potter", language="English")
-    for i in r :
-        print(i)
+    a = requests.get("https://libgen.mx")
+    print(a.text)
+        
