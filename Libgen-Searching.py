@@ -1,4 +1,5 @@
 from libgen_api import LibgenSearch
+from ast import literal_eval
 import requests
 
 class Libgen() :
@@ -25,7 +26,7 @@ class Libgen() :
     def searchISBN(self, isbn:int) -> list :
         url = "https://openlibrary.org/isbn/" + str(isbn) + ".json"
         book = requests.get(url)
-        return book.text
+        return literal_eval(book.text)
     
     def getFilter(self, publisher:str = "", year:str = "", language:str = "") -> dict :
         filter = {}
@@ -58,6 +59,8 @@ class Libgen() :
 
 
 if __name__ == "__main__" :
-    a = requests.get("https://libgen.mx")
-    print(a.text)
+    a = Libgen()
+    r = a.searchISBN(9788845292613)
+    for i in r :
+        print(i, "\t", r[i])
         
