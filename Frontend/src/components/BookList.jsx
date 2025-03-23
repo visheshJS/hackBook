@@ -3,7 +3,7 @@ import BookCard from "./BookCard";
 
 const BookList = ({ books }) => {
   if (!books || books.length === 0) {
-    return <p className="text-gray-600 text-center mt-4">No books found.</p>;
+    return <p className="text-gray-600 text-center mt-4">Keep Reading..Keep Searching..</p>;
   }
 
   return (
